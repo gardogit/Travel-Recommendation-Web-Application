@@ -210,3 +210,15 @@ body::before {
 .btn-submit:hover {
     background-color: #45a049;
 }
+
+.recommendation {
+    margin: 20px 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.recommendation img {
+    max-width: 100%;
+    border-radius: 4px;
+}
