@@ -26,6 +26,7 @@ body::before {
     flex-direction: column; 
     min-height: 100vh;
 }
+
 /*-------------------------------------------------------------*/
 .logo {
     color: white;
@@ -83,12 +84,15 @@ body::before {
     color: #888;
 }
 /*-------------------------------------------------------------*/
+.main-content {
+    display: flex; /* Cambiar a flex para el contenido y resultados */
+    flex: 1; /* Permitir que ocupe el espacio restante */
+}
 .content {
     color: white;
     text-align: left;
     padding: 0px 100px;
     width: 450px;
-    flex: 1;
 }
 .content h1{
     font-size: 48px;
@@ -221,4 +225,11 @@ body::before {
 .recommendation img {
     max-width: 100%;
     border-radius: 4px;
+}
+
+#results {
+    flex: 0 0 300px; /* Ancho fijo para los resultados */
+    max-width: 300px; /* Limitar el ancho máximo */
+    overflow-y: auto; /* Permitir desplazamiento si hay muchos resultados */
+    padding: 10px; /* Espaciado interno */
 }

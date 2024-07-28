@@ -6,26 +6,33 @@ fetch('travel_recommendation_api.json')
         const clearButton = document.querySelector('.btn.limpiar');
         const resultsContainer = document.querySelector('#results');
 
-        // Evento para buscar recomendaciones
         searchButton.addEventListener('click', () => {
             const keyword = searchInput.value.toLowerCase();
-            resultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+            resultsContainer.innerHTML = ''; 
 
             let results = [];
 
-            // Filtrar resultados según la palabra clave
-            if (keyword === 'beaches') {
-                results = data.beaches.slice(0, 2); // Obtener las dos primeras playas
-            } else if (keyword === 'temples') {
-                results = data.temples.slice(0, 2); // Obtener los dos primeros templos
-            } else if (keyword === 'countries') {
-                results = data.countries.map(country => country.cities[0]).slice(0, 2); // Obtener las dos primeras ciudades de los países
+            const beachesRegex = /^beach(es)?$/; 
+            const templesRegex = /^temple(s)?$/; 
+            const countriesRegex = /^countr(y|ies)$/;
+
+            if (beachesRegex.test(keyword)) {
+                results = data.beaches.slice(0, 2); 
+            } else if (templesRegex.test(keyword)) {
+                results = data.temples.slice(0, 2); 
+            } else if (countriesRegex.test(keyword)) {
+                results = data.countries.map(country => country.cities[0]).slice(0, 2); 
+            } else if (keyword.startsWith('beach')) {
+                results = data.beaches.slice(0, 2); 
+            } else if (keyword.startsWith('temple')) {
+                results = data.temples.slice(0, 2); 
+            } else if (keyword.startsWith('countr')) {
+                results = data.countries.map(country => country.cities[0]).slice(0, 2); 
             } else {
-                resultsContainer.innerHTML = '<p>No hay resultados para esa búsqueda.</p>';
+                resultsContainer.innerHTML = '<p>There are no results for that search.</p>';
                 return;
             }
 
-            // Mostrar resultados
             results.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('recommendation');
@@ -47,10 +54,9 @@ fetch('travel_recommendation_api.json')
             });
         });
 
-        // Evento para limpiar la búsqueda
         clearButton.addEventListener('click', () => {
-            searchInput.value = ''; // Limpiar el input
-            resultsContainer.innerHTML = ''; // Limpiar resultados
+            searchInput.value = ''; 
+            resultsContainer.innerHTML = ''; 
         });
     })
-    .catch(error => console.error('Error cargando el archivo JSON:', error));
+    .catch(error => console.error('JSON error:', error));
